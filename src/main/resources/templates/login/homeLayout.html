@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org" xmlns:layout="http://www.ultraq.net.nz/thymLeaf/layout">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet">
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<link th:href="@{/css/home.css}" rel="stylesheet"></link>
+<title>Home</title>
+</head>
+<body>
+<!-- ヘッダー -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fiuild">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">SpringSample</a>
+			</div>
+			<form method="post" th:action="@{/login}">
+				<button class="btn btn-link pull-right navber-brand" type="submit">ログアウト</button>
+			</form>
+		</div>
+	</nav>
+<!-- サイドバー -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2 sidebar">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation">
+						<a th:href="@{'/userList'}">ユーザー管理</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- コンテンツ -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-10" col-sm-offset-2 main>
+				<!-- th:include="<ファイルパス>"  ファイルパスのhtmlが表示-->
+				<div th:include="__${contents}__"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
