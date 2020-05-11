@@ -6,10 +6,12 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.example.demo.login.domain.model.GroupOrder;
 import jp.co.example.demo.login.domain.model.SignupForm;
 
 @Controller
@@ -35,8 +37,8 @@ public class SignupController {
 		return "login/signup";
 	}
 	
-	@PostMapping("/signup")		
-	public String postSingup(@ModelAttribute SignupForm form, BindingResult bindingResult, Model model) {
+	@PostMapping("/signup")					//@Validated->バリデーションの実施					//BindingResult->バインドの結果
+	public String postSingup(@ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult, Model model) {
 		//入力チェックに引っかかった場合ユーザー登録画面に戻る
 		if(bindingResult.hasErrors()) {
 			return getSignup(form, model);
