@@ -23,7 +23,7 @@ public class HomeController {
 	
 	@PostMapping("/logout")
 	public String postHome() {
-		//ログイン画面にリダイレクト
+		//ログイン画面にリダイレクトする
 		return "redirect:/login";
 	}
 	
