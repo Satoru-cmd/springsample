@@ -80,7 +80,37 @@ public class HomeController {
 		return "login/homeLayout";
 		
 	}
+									//URLとbuttonのname属性を見る
+	@PostMapping(value="/userDetail", params="update")
+	public String postUserDetailUpdate(@ModelAttribute SignupForm form, Model model) {
+		User user = new User();
+		user.setUserId(form.getUserId());
+		user.setPassword(form.getPassword());
+		user.setBirthday(form.getBirthday());
+		user.setMarriage(form.isMarriage());
+		user.setUserName(form.getUserName());
+		user.setAge(form.getAge());
+		
+		boolean result = userService.updateOne(user);
+		if(result = true) {
+			model.addAttribute("result", "更新成功");
+		}else {
+			model.addAttribute("result", "更新失敗");
+		}
+		return getUserList(model);
+	}
 	
+	@PostMapping(value="/userDetail", params="delete")
+	public String postUserDelete(@ModelAttribute SignupForm form, Model model) {
+		System.out.println("削除ボタンの処理");
+		boolean result = userService.delete(form.getUserId());
+		if(result = true) {
+			model.addAttribute("result", "削除成功");
+		}else {
+			model.addAttribute("result", "削除失敗");
+		}
+		return getUserList(model);
+	}
 	
 	
 }

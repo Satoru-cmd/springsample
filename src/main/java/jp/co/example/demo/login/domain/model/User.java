@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
+//データベースから取得した値を、コントローラークラスやサービスクラスなどの間でやりとりするクラス
 @Data
 public class User {
 	

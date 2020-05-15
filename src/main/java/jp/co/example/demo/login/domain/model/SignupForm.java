@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
+//htmlとControllerクラスでデータをやりとりするクラス
 @Data
 public class SignupForm {
 	@NotBlank(groups = ValidGroup1.class)	//入力必須

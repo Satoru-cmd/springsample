@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import jp.co.example.demo.login.domain.model.User;
 import jp.co.example.demo.login.domain.repository.UserDao;
 
-@Repository
+@Repository("UserDaoJdbcImpl") //Bean名セット
 public class UserDaoJdbcImpl implements UserDao{
 
 	@Autowired
@@ -70,15 +70,20 @@ public class UserDaoJdbcImpl implements UserDao{
 		}
 		return userList;
 	}
+	
 	//Userテーブルを一件更新
 	@Override
 	public int updateOne(User user) throws DataAccessException{
-		return 0;
+		int rowNumber = jdbc.update("UPDATE m_user SET password=?,user_name=?,birthday=?,age=?,marriage=? WHERE user_id=?"
+				,user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
+		return rowNumber;
 	}
+	
 	//Userテーブルを一件削除
 	@Override 
 	public int deleteOne(String userId) throws DataAccessException{
-		return 0;
+		int rowNumber = jdbc.update("DELETE FROM m_user WHERE user_id=?",userId );
+		return rowNumber;
 	}
 	
 	//Userテーブルの全データをCSVにする

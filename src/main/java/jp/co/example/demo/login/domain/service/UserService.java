@@ -3,6 +3,7 @@ package jp.co.example.demo.login.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import jp.co.example.demo.login.domain.model.User;
@@ -12,6 +13,7 @@ import jp.co.example.demo.login.domain.repository.UserDao;
 public class UserService {
 	
 	@Autowired
+	@Qualifier("UserDaoJdbcImpl2") //どのBeanを使うか指定
 	UserDao dao;
 	
 	public boolean insert(User user) {
@@ -25,10 +27,12 @@ public class UserService {
 		}
 		return result;
 	}
+	
 	//カウント取得
 	public int count() {
 		return dao.count();
 	}
+	
 	//全部取得
 	public List<User> selectAll(){
 		return dao.selectAll();
@@ -37,4 +41,23 @@ public class UserService {
 		return dao.selectOne(userId);
 	}
 	
+	//一件更新
+	public boolean updateOne(User user) {
+		int rowNumber = dao.updateOne(user);
+		boolean result = false;
+		if( rowNumber > 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	//一件削除
+	public boolean delete(String userId) {
+		int rowNumber = dao.deleteOne(userId);
+		boolean result = false;
+		if(rowNumber > 0) {
+			result = true;
+		}
+		return result;
+	}
 }
