@@ -89,6 +89,12 @@ public class UserDaoJdbcImpl implements UserDao{
 	//Userテーブルの全データをCSVにする
 	@Override
 	public void userCsvOut() throws DataAccessException{
+		//m_userてーぶるのデータを全権取得
+		String sql = "SELECT * FROM m_user";
+		
+		UserRowCallbackHandler handler = new UserRowCallbackHandler();
+		//SQL実行＆CSV出力
+		jdbc.query(sql, handler);
 	}
 	
 	
