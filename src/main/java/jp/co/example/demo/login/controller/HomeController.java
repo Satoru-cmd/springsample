@@ -133,5 +133,11 @@ public class HomeController {
 				 //ResponseEntity<> -> htmlではなくファイル(byte型の配列）を戻す
 	}
 	
+	@GetMapping("/admin")
+	public String getAdmin(Model model) {
+		model.addAttribute("contents", "login/admin :: admin_contents");
+		return "login/homeLayout";
+	}
+	
 	
 }

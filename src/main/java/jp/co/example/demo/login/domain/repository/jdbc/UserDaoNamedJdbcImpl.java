@@ -29,8 +29,8 @@ public class UserDaoNamedJdbcImpl implements UserDao{
 	
 	@Override
 	public int insertOne(User user) {
-		String sql = "INSERT INTO m_user(user_id, password, user_name, birhtday, age, marriage, role)" +
-				"VALUES(:userId, :password, :userName, :birhtday, :age, :marriage, :role)";
+		String sql = "INSERT INTO m_user(user_id, password, user_name, birthday, age, marriage, role)" +
+				"VALUES(:userId, :password, :userName, :birthday, :age, :marriage, :role)";
 		
 		SqlParameterSource params = new MapSqlParameterSource().addValue("userId", user.getUserId())
 				.addValue("password", user.getPassword()).addValue("userName", user.getUserName())
@@ -51,7 +51,7 @@ public class UserDaoNamedJdbcImpl implements UserDao{
 		user.setBirthday((Date)map.get("birthday"));
 		user.setAge((Integer)map.get("age"));
 		user.setMarriage((Boolean)map.get("marriage"));
-		user.setRole((String)map.get("marriage"));
+		user.setRole((String)map.get("role"));
 		return user;
 		}
 	

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import jp.co.example.demo.login.domain.model.User;
@@ -18,6 +19,9 @@ public class UserDaoJdbcImpl implements UserDao{
 
 	@Autowired
 	JdbcTemplate jdbc;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	//Userテーブルの件数を取得
 	@Override
@@ -30,9 +34,14 @@ public class UserDaoJdbcImpl implements UserDao{
 	//Userテーブルのデータを１件挿入
 	@Override
 	public int insertOne(User user) throws DataAccessException{
-		int rowNumber = jdbc.update("INSERT INTO m_user(user_id,"
-				+"password, user_name, birthday, age, marriage, role)VALUES(?,?,?,?,?,?,?)"
-				,user.getUserId(), user.getPassword(),  user.getUserName(), user.getBirthday()
+		//パスワード暗号化
+		String password = passwordEncoder.encode(user.getPassword());
+		//ユーザーテーブルに一件登録する
+		String sql = "INSERT INTO m_user(user_id, password, user_name, birthday, age,"
+				+ "marriage, role) VALUES(?,?,?,?,?,?,?)";
+		
+		int rowNumber = jdbc.update(sql
+				,user.getUserId(), password,  user.getUserName(), user.getBirthday()
 				,user.getAge(), user.isMarriage(), user.getRole());
 		return rowNumber;
 	}
@@ -74,8 +83,11 @@ public class UserDaoJdbcImpl implements UserDao{
 	//Userテーブルを一件更新
 	@Override
 	public int updateOne(User user) throws DataAccessException{
-		int rowNumber = jdbc.update("UPDATE m_user SET password=?,user_name=?,birthday=?,age=?,marriage=? WHERE user_id=?"
-				,user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
+		//パスワード暗号化
+		String password = passwordEncoder.encode(user.getPassword());
+		String sql = "UPDATE m_user SET password=?, user_name=?, birthday=?, age=?, marriage=? WHERE user_id=?";
+		int rowNumber = jdbc.update(sql, password, user.getUserName()
+				, user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
 		return rowNumber;
 	}
 	

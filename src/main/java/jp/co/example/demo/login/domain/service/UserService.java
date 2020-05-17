@@ -19,7 +19,7 @@ import jp.co.example.demo.login.domain.repository.UserDao;
 public class UserService {
 	
 	@Autowired
-	@Qualifier("UserDaoNamedJdbcImpl") //どのBeanを使うか指定
+	@Qualifier("UserDaoJdbcImpl") //どのBeanを使うか指定
 	UserDao dao;
 	
 	public boolean insert(User user) {

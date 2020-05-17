@@ -79,6 +79,18 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
+		<!--Springセキュリティー  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<!-- ThymeLeaf拡張ライブラリ -->
+		<dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+		
 	</dependencies>
 
 	<build>
@@ -89,5 +101,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
+	
 </project>
