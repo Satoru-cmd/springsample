@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeLeaf.org" xmlns:layout="http://www.ultraq.net.nz/thymLeaf/layout">
+<html xmlns:th="http://www.thymeLeaf.org" xmlns:layout="http://www.ultraq.net.nz/thymLeaf/layout"
+		xmlns:sec="http://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet">
@@ -28,7 +29,8 @@
 					<li role="presentation">
 						<a th:href="@{'/userList'}">ユーザー管理</a>
 					</li>
-					<li role="presentation">
+					<!-- 画面表示の認可 sec:authorize="hasRole('権限')-->
+					<li role="presentation" sec:authorize="hasRole('ADMIN')">
 						<a th:href="@{'/admin'}">アドミン画面</a>
 					</li>
 				</ul>

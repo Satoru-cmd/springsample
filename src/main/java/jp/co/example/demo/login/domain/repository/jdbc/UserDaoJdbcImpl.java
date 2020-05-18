@@ -57,6 +57,7 @@ public class UserDaoJdbcImpl implements UserDao{
 		user.setAge((Integer)map.get("age"));
 		user.setMarriage((Boolean)map.get("marriage"));
 		user.setRole((String)map.get("role"));
+		
 		return user;
 	}
 	//Userテーブルを全部取得

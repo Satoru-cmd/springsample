@@ -90,7 +90,27 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
-		
+        <!-- Spring Security Test -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+  			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<scope>test</scope>
+		</dependency>
+		<dependency>
+      		<groupId>org.junit.jupiter</groupId>
+     	 	<artifactId>junit-jupiter-engine</artifactId>
+     	 	<scope>test</scope>
+    	</dependency>
+    	<dependency>
+       	 	<groupId>org.junit.platform</groupId>
+        	<artifactId>junit-platform-launcher</artifactId>
+        	<scope>test</scope>
+   	 	</dependency>
 	</dependencies>
 
 	<build>

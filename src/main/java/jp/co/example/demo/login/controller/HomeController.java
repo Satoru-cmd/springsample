@@ -75,6 +75,7 @@ public class HomeController {
 			form.setBirthday(user.getBirthday());
 			form.setAge(user.getAge());
 			form.setMarriage(user.isMarriage());
+			System.out.println(user.getPassword());
 			model.addAttribute("signupForm", form);
 		}
 		return "login/homeLayout";
