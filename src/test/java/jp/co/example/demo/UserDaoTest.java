@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import jp.co.example.demo.login.domain.repository.UserDao;
 @Transactional	//トランザクションを使う
 public class UserDaoTest {
 
+//リポジトリークラスのテスト
 	@Autowired
 	@Qualifier("UserDaoJdbcImpl")
 	UserDao dao;
@@ -25,5 +27,11 @@ public class UserDaoTest {
 	public void countTest1() {
 		
 		assertEquals(dao.count(), １);
+	}
+	
+	@Test
+	@Sql("/testdate.sql")
+	public void countTest2() {
+		assertEquals(dao.count(), 2);
 	}
 }
