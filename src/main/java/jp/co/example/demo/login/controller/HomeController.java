@@ -5,10 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.example.demo.login.domain.model.SignupForm;
 import jp.co.example.demo.login.domain.model.User;
+import jp.co.example.demo.login.domain.model.UserSession;
 import jp.co.example.demo.login.domain.service.UserService;
 
 @Controller
@@ -25,6 +30,12 @@ public class HomeController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserSession userSession;
+	
+//	@Autowired
+//	User user;
 	
 	private Map<String, String> radioMarriage;
 	
@@ -36,13 +47,25 @@ public class HomeController {
 	}
 	@GetMapping("/home")
 	public String getHome(Model model) {
-		//conntents部分にホーム画面を表示するために文字列を登録
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userId = auth.getName();
+		User user = userService.selectOne(userId);
+		String userName = user.getUserName();
+		model.addAttribute("userName",userName);
+		
+		//conntents部分にホーム画面を表示すために文字列を登録
 		model.addAttribute("contents", "login/home ::home_contents");
 		return"login/homeLayout";
 	}
 	
 	@GetMapping("/userList")
 	public String getUserList(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userId = auth.getName();
+		User user = userService.selectOne(userId);
+		String userName = user.getUserName();
+		model.addAttribute("userName",userName);
+		
 		model.addAttribute("contents", "login/userList::userList_contents");
 		List<User> userList = userService.selectAll();
 		model.addAttribute("userList", userList);
@@ -66,6 +89,12 @@ public class HomeController {
 		model.addAttribute("contents", "login/userDetail::userDetail_contents");
 		radioMarriage = initRadioMarriage();
 		model.addAttribute("radioMarriage", radioMarriage);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userid = auth.getName();
+		User users = userService.selectOne(userid);
+		String userName = users.getUserName();
+		model.addAttribute("userName",userName);
 		
 		if(userId != null && userId.length() > 0) {
 			User user = userService.selectOne(userId);
@@ -139,6 +168,7 @@ public class HomeController {
 		model.addAttribute("contents", "login/admin :: admin_contents");
 		return "login/homeLayout";
 	}
+	
 	
 	
 }

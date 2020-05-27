@@ -12,3 +12,4 @@ CREATE TABLE IF NOT EXISTS m_user(
 	marriage BOOLEAN,
 	role VARCHAR(50)
 );
+

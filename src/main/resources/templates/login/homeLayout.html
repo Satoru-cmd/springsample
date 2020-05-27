@@ -19,6 +19,7 @@
 			<form method="post" th:action="@{/login}">
 				<button class="btn btn-link pull-right navber-brand" type="submit">ログアウト</button>
 			</form>
+			<p th:text="${userName} + ' ' + さん"></p>
 		</div>
 	</nav>
 <!-- サイドバー -->
@@ -28,6 +29,9 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li role="presentation">
 						<a th:href="@{'/userList'}">ユーザー管理</a>
+					</li>
+					<li role="presentation">
+						<a th:href="@{'/twitter'}">twitter</a>
 					</li>
 					<!-- 画面表示の認可 sec:authorize="hasRole('権限')-->
 					<li role="presentation" sec:authorize="hasRole('ADMIN')">

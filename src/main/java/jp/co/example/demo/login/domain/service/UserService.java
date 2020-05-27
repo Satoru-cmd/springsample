@@ -43,6 +43,7 @@ public class UserService {
 	public List<User> selectAll(){
 		return dao.selectAll();
 	}
+	//一件取得
 	public User selectOne(String userId) {
 		return dao.selectOne(userId);
 	}
