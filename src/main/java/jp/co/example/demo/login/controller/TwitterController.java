@@ -20,28 +20,16 @@ public class TwitterController {
 
 	@Autowired
 	UserService userService;
-	
-	
+
 	@GetMapping("/twitter")
-	public String twitter(Model model, HttpServletRequest httpServletRequest ) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userId = auth.getName();
-		User user = userService.selectOne(userId);
-		String userName = user.getUserName();
-		model.addAttribute("userName",userName);
+	public String twitter(Model model) {
 		model.addAttribute("contents", "login/twitter :: twitter_contents");
 		return "login/homeLayout";
 	}
-	
+
 	@PostMapping("/contribute")
 	public String postTwitter(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userId = auth.getName();
-		User user = userService.selectOne(userId);
-		String userName = user.getUserName();
-		model.addAttribute("userName",userName);
 		model.addAttribute("contents", "login/twitter :: twitter_contents");
 		return "login/homeLayout";
-		
 	}
 }

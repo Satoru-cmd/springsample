@@ -50,6 +50,8 @@ public class HomeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userId = auth.getName();
 		User user = userService.selectOne(userId);
+		userSession.setUserName(user.getUserName());
+		userSession.setUserId(user.getUserId());
 		String userName = user.getUserName();
 		model.addAttribute("userName",userName);
 		
@@ -60,12 +62,6 @@ public class HomeController {
 	
 	@GetMapping("/userList")
 	public String getUserList(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userId = auth.getName();
-		User user = userService.selectOne(userId);
-		String userName = user.getUserName();
-		model.addAttribute("userName",userName);
-		
 		model.addAttribute("contents", "login/userList::userList_contents");
 		List<User> userList = userService.selectAll();
 		model.addAttribute("userList", userList);
@@ -89,12 +85,6 @@ public class HomeController {
 		model.addAttribute("contents", "login/userDetail::userDetail_contents");
 		radioMarriage = initRadioMarriage();
 		model.addAttribute("radioMarriage", radioMarriage);
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userid = auth.getName();
-		User users = userService.selectOne(userid);
-		String userName = users.getUserName();
-		model.addAttribute("userName",userName);
 		
 		if(userId != null && userId.length() > 0) {
 			User user = userService.selectOne(userId);
