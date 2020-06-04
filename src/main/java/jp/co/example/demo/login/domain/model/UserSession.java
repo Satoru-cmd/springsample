@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("UserSession")
 @Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class UserSession implements Serializable {
 	

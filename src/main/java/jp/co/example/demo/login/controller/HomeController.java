@@ -52,8 +52,6 @@ public class HomeController {
 		User user = userService.selectOne(userId);
 		userSession.setUserName(user.getUserName());
 		userSession.setUserId(user.getUserId());
-		String userName = user.getUserName();
-		model.addAttribute("userName",userName);
 		
 		//conntents部分にホーム画面を表示すために文字列を登録
 		model.addAttribute("contents", "login/home ::home_contents");
